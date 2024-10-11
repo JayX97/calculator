@@ -1,0 +1,64 @@
+{
+    "numPad": [
+        {
+            "label": "AC",
+            "id": "clear",
+            "classes": ""
+        },
+        {
+            "label": "7",
+            "id": "seven",
+            "classes": "number"
+        },
+        {
+            "label": "8",
+            "id": "eight",
+            "classes": "number"
+        },
+        {
+            "label": "9",
+            "id": "nine",
+            "classes": "number"
+        },
+        {
+            "label": "4",
+            "id": "four",
+            "classes": "number"
+        },
+        {
+            "label": "5",
+            "id": "five",
+            "classes": "number"
+        },
+        {
+            "label": "6",
+            "id": "six",
+            "classes": "number"
+        },
+        {
+            "label": "1",
+            "id": "one",
+            "classes": "number"
+        },
+        {
+            "label": "2",
+            "id": "two",
+            "classes": "number"
+        },
+        {
+            "label": "3",
+            "id": "three",
+            "classes": "number"
+        },
+        {
+            "label": "0",
+            "id": "zero",
+            "classes": "number"
+        },
+        {
+            "label": ".",
+            "id": "decimal",
+            "classes": ""
+        }
+    ]
+}

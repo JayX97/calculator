@@ -1,0 +1,29 @@
+{
+    "operatorPad": [
+        {
+            "label": "/",
+            "id": "divide",
+            "classes": "operator"
+        },
+        {
+            "label": "X",
+            "id": "multiply",
+            "classes": "operator"
+        },
+        {
+            "label": "-",
+            "id": "subtract",
+            "classes": "operator"
+        },
+        {
+            "label": "+",
+            "id": "add",
+            "classes": "operator"
+        },
+        {
+            "label": "=",
+            "id": "equals",
+            "classes": "operator"
+        }
+    ]
+}
