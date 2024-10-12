@@ -1,17 +1,43 @@
+import { useState } from 'react';
+
 const Calculator = (props) => {
     const numbers = props.numbers;
     const operators = props.operators;
+    const [input, setInput] = useState("0");
+    const [output, setOutput] = useState("");
+    var result = 0;
+
+    const handleNumInput = (event) => {// function for input display
+        const value = event.target.value;
+        const classList = event.target.classList;
+
+        if (classList.contains("number")) {// if button is number
+            if (input === "0") setInput(value);
+            else setInput(input + value);
+        } else {
+            switch(value) {
+                case "AC": // clear button
+                    setInput("0");
+                    break;
+                case ".": // decimal button
+                    if (input.indexOf(".") === -1) setInput(input + value); //only add decimal point if no other decimal point exists in input string
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
     return (
         <div id="calculator">
             <div id="expression-display">Expression</div>
-            <div id="display">Input</div>
+            <div id="display">{input}</div>
             <div id="calculator-pad">
                 <div id="num-pad">
                     {
                         numbers.map(number => {
                             return (
-                                <button className={number.classes} id={number.id}>{number.label}</button>
+                                <button onClick={handleNumInput} className={number.classes} id={number.id} value={number.label}>{number.label}</button>
                             )
                         })
                     }
