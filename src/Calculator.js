@@ -14,13 +14,19 @@ const Calculator = (props) => {
         if (classList.contains("number")) {// if button is number
             if (input === "0") setInput(value);
             else setInput(input + value);
+            setOutput(output + value);
         } else {
             switch(value) {
                 case "AC": // clear button
                     setInput("0");
+                    setOutput("");
                     break;
                 case ".": // decimal button
-                    if (input.indexOf(".") === -1) setInput(input + value); //only add decimal point if no other decimal point exists in input string
+                    if (input.indexOf(".") === -1) { 
+                        setInput(input + value); //only add decimal point if no other decimal point exists in input string
+                        if (input.length === 1 && input[0] === "0") setOutput(input + value);
+                        else setOutput(output + value);
+                    }
                     break;
                 default:
                     break;
@@ -30,7 +36,7 @@ const Calculator = (props) => {
 
     return (
         <div id="calculator">
-            <div id="expression-display">Expression</div>
+            <div id="expression-display">{output}</div>
             <div id="display">{input}</div>
             <div id="calculator-pad">
                 <div id="num-pad">
