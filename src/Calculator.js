@@ -10,12 +10,18 @@ const Calculator = (props) => {
     const handleNumInput = (event) => {// function for input display
         const value = event.target.value;
         const classList = event.target.classList;
+        var zeroArr = output.split(" ");
 
         if (classList.contains("number")) {// if button is number
-            if (input === "0" || input === "/" || input === "X" || input === "+" || input === "-") setInput(value);
+            //input
+            if (input === "0" || input === "/" || input === "*" || input === "+" || input === "-") setInput(value);
             else setInput(input + value);
             
-            if (Number.isInteger(parseInt(output[output.length - 1])) || output[output.length - 1] === ".") setOutput(output + value);
+            //output
+            if (Number.isInteger(parseInt(output[output.length - 1]))) {// last character is number
+                if (input === "0" && zeroArr[zeroArr.length - 1] === "0") setOutput(output.slice(0, -1) + value); // cut out original zero from input to avoid duplicate zeroes
+                else setOutput(output + value);
+            } else if (output[output.length - 1] === ".") setOutput(output + value);
             else setOutput(output + " " + value);
         } else {
             switch(value) {
@@ -30,7 +36,7 @@ const Calculator = (props) => {
                         if (!(Number.isInteger(parseInt(input[0])))) setInput("0" + value); //change input display to 0. if current display is operator
                         else setInput(input + value) //only add decimal point if no other decimal point exists in input string
                         
-                        if (input.length === 1 && input[0] === "0") setOutput(input + value); //current input display is 0 and only 0
+                        if (input === "0" && output === "") setOutput(output + "0" + value); //current input display is 0 and only 0
                         else if (input.length === 1 && (!(Number.isInteger(parseInt(input[0]))))) setOutput(output + " 0" + value); //current input display is an operator
                         else setOutput(output + value);
                     }
@@ -69,6 +75,8 @@ const Calculator = (props) => {
                 setOutput(outputAppend + "-");
                 break;
             case "=":
+                resultArr = output.split(" ");
+                resultArr.shift();
                 console.log(resultArr); // debugging
                 break;
             default:
