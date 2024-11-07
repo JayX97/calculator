@@ -97,14 +97,45 @@ const Calculator = (props) => {
                 setOutput(outputAppend + "-")
                 break;
             case "=": // COMPUTE EXPRESSION HERE
-                const resultArr = output.split(" ");
-                resultArr.shift(); // first element is an empty string
-                console.log(resultArr); // debugging
-                console.log(output.length);
+                const result = parseFloat(calcResult().toFixed(4)); // parseFloat used to remove trailing zeros
+                setOutput(result.toString());
                 break;
             default:
                 break;
         }
+    };
+
+    const calcResult = () => {// function used to parse output string and evaluate expression
+        var result = 0;
+        const resultArr = output.split(" ");
+        if (resultArr[0] === "") resultArr.shift(); // first element is an empty string (weird bug)
+        var currentOp = "+";
+
+        if (!Number.isInteger(parseInt(resultArr[0]))) resultArr.shift(); // array starts with operator, continue with calculation
+
+        resultArr.forEach((currentValue) => {
+            if (!Number.isInteger(parseInt(currentValue))) currentOp = currentValue;
+            else {
+                switch(currentOp) {
+                    case "+":
+                        result = parseFloat(result) + parseFloat(currentValue);
+                        break;
+                    case "-":
+                        result = parseFloat(result) - parseFloat(currentValue);
+                        break;
+                    case "*":
+                        result = parseFloat(result) * parseFloat(currentValue);
+                        break;
+                    case "/":
+                        result = parseFloat(result) / parseFloat(currentValue);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+
+        return result;
     };
 
     return (
