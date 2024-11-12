@@ -5,6 +5,7 @@ const Calculator = (props) => {
     const operators = props.operators;
     const [input, setInput] = useState("0");
     const [output, setOutput] = useState("");
+    const [resultDisplayed, setResultDisplayed] = useState(false); /* MAIN FOCUS */
 
     const handleNumInput = (event) => {// handler function for number, clear, and decimal point buttons
         const value = event.target.value;
@@ -13,21 +14,29 @@ const Calculator = (props) => {
         const negRegex = /[+\-*/]\s[-]$/; // negative sign present at end of output
         const startingZero = /\s0$|-0$/; // zero at the start of last number in output regardless of sign
         const zeroSlice = output.slice(0, -1); // copy of current output to help slice starting zero
+        var outputAppend = output;
+        var inputAppend = input;
 
 
         if (classList.contains("number")) {// if button is number
-            //input
+            // reset display if new number is inputted after result instead of operator
+            if (resultDisplayed === true) {
+                outputAppend = "";
+                inputAppend = "";
+                setResultDisplayed(false);
+            }
+            // input
             if (input === "0"|| input === "/" || input === "*" || input === "+" || input === "-") setInput(value);
-            else setInput(input + value);
+            else setInput(inputAppend + value);
             
-            //output
+            // output
             if (startingZero.test(output)) {
                 if (value !== "0") setOutput(zeroSlice + value);
-                else setOutput(output);
+                else setOutput(outputAppend);
             } else {
-                if (Number.isInteger(parseInt(output[output.length - 1])) || output[output.length - 1] === ".") setOutput(output + value);
-                else if ((output.length === 1 && output[0] === "-") || negRegex.test(output)) setOutput(output + value); // current number starts with negative sign
-                else setOutput(output + " " + value);
+                if (Number.isInteger(parseInt(output[output.length - 1])) || output[output.length - 1] === ".") setOutput(outputAppend + value);
+                else if ((output.length === 1 && output[0] === "-") || negRegex.test(output)) setOutput(outputAppend + value); // current number starts with negative sign
+                else setOutput(outputAppend + " " + value);
             }
         } else {
             switch(value) {
@@ -39,13 +48,13 @@ const Calculator = (props) => {
                     if (input.indexOf(".") === -1) {// if no decimal point exists in the current input
                         //input
                         if (!(Number.isInteger(parseInt(input[0])))) setInput("0" + value); //change input display to 0. if current display is operator
-                        else setInput(input + value) //only add decimal point if no other decimal point exists in input string
+                        else setInput(inputAppend + value) //only add decimal point if no other decimal point exists in input string
                         
                         //output
-                        if (output[output.length - 1] === "0") setOutput(output + value); // weird bug happens without this line
-                        else if (input.length === 1 && input[0] === "0") setOutput(input + value); // current input display is 0 and only 0
-                        else if (input.length === 1 && (!(Number.isInteger(parseInt(input[0]))))) setOutput(output + " 0" + value); //current input display is an operator
-                        else setOutput(output + value);
+                        if (output[output.length - 1] === "0") setOutput(outputAppend + value); // weird bug happens without this line
+                        else if (input.length === 1 && input[0] === "0") setOutput(inputAppend + value); // current input display is 0 and only 0
+                        else if (input.length === 1 && (!(Number.isInteger(parseInt(input[0]))))) setOutput(outputAppend + " 0" + value); //current input display is an operator
+                        else setOutput(outputAppend + value);
                     }
                     break;
                 default:
@@ -60,6 +69,8 @@ const Calculator = (props) => {
         const oneOp = /[+\-*/]$/; // one operator without additional minus at the end
         const twoOp = /[+\-*/]\s[-]$/; // two operators with minus being last
         var outputAppend = output;
+
+        setResultDisplayed(false);
 
         // negative sign check
         if (output.length > 1 && oneOp.test(output) && !twoOp.test(output)) {
@@ -99,6 +110,8 @@ const Calculator = (props) => {
             case "=": // COMPUTE EXPRESSION HERE
                 const result = parseFloat(calcResult().toFixed(4)); // parseFloat used to remove trailing zeros
                 setOutput(result.toString());
+                setInput(result.toString());
+                setResultDisplayed(true);
                 break;
             default:
                 break;
