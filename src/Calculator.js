@@ -156,16 +156,22 @@ const Calculator = (props) => {
             <div id="expression-display">{output}</div>
             <div id="display">{input}</div>
             <div id="calculator-pad">
-                <div id="num-pad">
+                <div className="container row row-cols-3" id="num-pad">
                     {
                         numbers.map(number => {
-                            return (
-                                <button onClick={handleNumInput} className={number.classes} id={number.id} value={number.label}>{number.label}</button>
-                            )
+                            if (number.id !== "space") {
+                                return (
+                                    <button onClick={handleNumInput} className={number.classes} id={number.id} value={number.label}>{number.label}</button>
+                                )
+                            } else { // space added between AC and "7 buttons
+                                return (
+                                    <div className={number.classes} id={number.id} value={number.label}></div>
+                                )
+                            }
                         })
                     }
                 </div>
-                <div id="operator-pad">
+                <div className="container row row-cols-1 col-4" id="operator-pad">
                     {
                         operators.map(operator => {
                             return (
