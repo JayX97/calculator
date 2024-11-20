@@ -3,27 +3,27 @@
         {
             "label": "/",
             "id": "divide",
-            "classes": "operator"
+            "classes": "btn btn-dark operator"
         },
         {
             "label": "X",
             "id": "multiply",
-            "classes": "operator"
+            "classes": "btn btn-dark operator"
         },
         {
             "label": "-",
             "id": "subtract",
-            "classes": "operator"
+            "classes": "btn btn-dark operator big"
         },
         {
             "label": "+",
             "id": "add",
-            "classes": "operator"
+            "classes": "btn btn-dark operator big"
         },
         {
             "label": "=",
             "id": "equals",
-            "classes": "operator"
+            "classes": "btn btn-primary operator big"
         }
     ]
 }
