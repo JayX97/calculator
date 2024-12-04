@@ -1,3 +1,5 @@
+@import url('https://fonts.cdnfonts.com/css/digital-numbers');
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -14,6 +16,7 @@ code {
 
 #root {
   display: flex;
+  background-color: #404040;
   width: 100vw;
   height: 100vh;
   align-items: center;
@@ -31,6 +34,7 @@ code {
   text-align: end;
   line-height: 30px;
   font-size: 20px;
+  font-family: 'Digital Numbers', sans-serif;
   color: black;
   background-color: #93C572;
   height: 30px; /* CHANGE TO PADDING */
@@ -43,6 +47,7 @@ code {
   text-align: end;
   line-height: 30px;
   font-size: 20px;
+  font-family: 'Digital Numbers', sans-serif;
   color: black;
   background-color: #93C572;
   height: 30px; /* CHANGE TO PADDING */
@@ -79,6 +84,7 @@ code {
 }
 
 .footer {
+  color: white;
   width: 50%;
   height: 25%;
   margin: 0 auto;
